@@ -16,3 +16,28 @@ class UserResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+class NoteCreate(BaseModel):
+    title: str
+    content: str
+
+class NoteResponse(BaseModel):
+    id: int
+    title: str
+    content: str
+
+    class Config:
+        from_attributes = True
+
+class AnnouncementCreate(BaseModel):
+    title: str
+    content: str
+
+class AnnouncementResponse(BaseModel):
+    id: int
+    title: str
+    content: str
+    author: str
+
+    class Config:
+        from_attributes = True

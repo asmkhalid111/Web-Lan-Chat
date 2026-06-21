@@ -132,6 +132,76 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = '/';
         });
 
+        // Notes Logic
+        const btnAddNote = document.getElementById('btn-add-note');
+        const noteForm = document.getElementById('note-form');
+        const notesList = document.getElementById('notes-list');
+
+        btnAddNote.addEventListener('click', () => {
+            noteForm.classList.toggle('hidden');
+        });
+
+        async function loadNotes() {
+            try {
+                const res = await fetch(`/api/notes/${userData.student_id}`);
+                if (res.ok) {
+                    const notes = await res.json();
+                    notesList.innerHTML = '';
+                    notes.forEach(n => {
+                        const div = document.createElement('div');
+                        div.className = 'bg-white/5 p-2 rounded text-xs';
+                        div.innerHTML = `<div class="font-bold text-gray-200">${n.title}</div><div class="text-gray-400 mt-1">${n.content}</div>`;
+                        notesList.appendChild(div);
+                    });
+                }
+            } catch (err) { console.error("Error loading notes"); }
+        }
+
+        noteForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const title = document.getElementById('note-title').value;
+            const content = document.getElementById('note-content').value;
+            try {
+                const res = await fetch(`/api/notes/${userData.student_id}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title, content })
+                });
+                if (res.ok) {
+                    document.getElementById('note-title').value = '';
+                    document.getElementById('note-content').value = '';
+                    noteForm.classList.add('hidden');
+                    loadNotes();
+                }
+            } catch (err) { console.error("Error creating note"); }
+        });
+
+        // Announcements Logic
+        const announcementsList = document.getElementById('announcements-list');
+
+        async function loadAnnouncements() {
+            try {
+                const res = await fetch('/api/announcements');
+                if (res.ok) {
+                    const anns = await res.json();
+                    announcementsList.innerHTML = '';
+                    if (anns.length === 0) {
+                        announcementsList.innerHTML = '<div class="text-xs text-gray-500 italic">No announcements</div>';
+                    }
+                    anns.forEach(a => {
+                        const div = document.createElement('div');
+                        div.className = 'bg-primary/20 p-2 rounded text-xs border border-primary/30';
+                        div.innerHTML = `<div class="font-bold text-indigo-300">${a.title}</div><div class="text-gray-300 mt-1">${a.content}</div><div class="text-right text-[10px] text-gray-500 mt-1">- ${a.author}</div>`;
+                        announcementsList.appendChild(div);
+                    });
+                }
+            } catch (err) { console.error("Error loading announcements"); }
+        }
+
+        // Initial Load
+        loadNotes();
+        loadAnnouncements();
+
         // Initialize WebSocket
         // Using window.location.host to automatically connect to the correct IP/port
         const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';

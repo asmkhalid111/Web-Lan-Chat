@@ -1,0 +1,11 @@
+Test Case ID,Module,Test Description,Pre-conditions,Test Steps,Expected Result,Actual Result,Status,Test Type
+TC_001,Auth,Register New User,"App running, DB clean","1. Open / 2. Click Register 3. Enter Student ID, Name, Password 4. Submit",Account created and success message shown,Account created,Pass,Integration/UI
+TC_002,Auth,Register Existing User,User with Student ID exists,"1. Open / 2. Click Register 3. Enter existing Student ID 4. Submit",Error message 'Student ID already registered' shown,Error shown,Pass,Integration
+TC_003,Auth,Login Valid User,User exists in DB,"1. Open / 2. Enter valid ID and Password 3. Submit",Redirected to /static/dashboard.html,Redirected,Pass,Integration/UI
+TC_004,Auth,Login Invalid Password,User exists in DB,"1. Open / 2. Enter valid ID and wrong Password 3. Submit",Error message 'Invalid credentials' shown,Error shown,Pass,Integration
+TC_005,Security,Password Hashing,None,"1. Register user with 'mypassword' 2. Inspect DB",Password field is a bcrypt hash not plain text,Stored as hash,Pass,Unit
+TC_006,Chat,Global Message Broadcast,"Two users logged in, WS connected","1. User A sends 'Hello' in global-chat 2. Check User B screen",User B instantly sees 'Hello' from User A,Broadcasted,Pass,Manual/WS
+TC_007,Chat,Chat History on Join,Global messages exist in DB,"1. User C logs in 2. Open dashboard",User C sees last 50 global messages instantly,Messages rendered,Pass,Integration
+TC_008,Notes,Create Private Note,User logged in,"1. Click + on My Notes 2. Enter Title/Content 3. Save",Note appears in My Notes sidebar,Note saved,Pass,Integration/UI
+TC_009,Notes,Fetch Private Notes,User logged in with existing notes,1. Refresh dashboard,User sees their previously saved notes,Notes fetched,Pass,Integration
+TC_010,Announcements,Fetch Global Announcements,Announcements exist in DB,1. Refresh dashboard,User sees announcements in sidebar,Announcements fetched,Pass,Integration
