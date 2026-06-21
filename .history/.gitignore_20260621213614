@@ -1,0 +1,20 @@
+#STREAMING_CHUNK: Defining files to ignore for Git/GitHub
+
+Environments
+
+venv/
+env/
+
+# Python cache
+
+pycache/*.py[cod]*$py.class
+
+# Databases (We don't want to upload the real chat data to GitHub)
+
+*.sqlite3
+*.db
+
+# OS generated files
+
+.DS_Store
+Thumbs.db

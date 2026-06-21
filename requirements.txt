@@ -1,0 +1,12 @@
+# requirements.txt
+fastapi
+uvicorn
+pytest
+httpx
+selenium
+sqlalchemy
+pytest-asyncio
+passlib
+bcrypt
+python-multipart
+websockets
