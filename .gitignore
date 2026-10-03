@@ -16,6 +16,6 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-
-#History
-.history
+# IDE and Editor folders
+.vscode/
+.history/
