@@ -94,7 +94,4 @@ git clone https://github.com/asmkhalid111/Web-Lan-Chat.git
   2. Navigate to that exact IP and port on your device: `http://192.168.0.106:8000`
   *(Note: You may need to allow port 8000 through your Windows Defender Firewall).*
 
----
-<div align="center">
-  <i>Built with ❤️ focusing on modern web standards and rigorous Quality Assurance.</i>
-</div>
+
